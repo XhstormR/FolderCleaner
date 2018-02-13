@@ -23,7 +23,7 @@ version = "1.0-SNAPSHOT"
 plugins {
     idea
     application
-    kotlin("jvm") version "1.2.10"
+    kotlin("jvm") version "1.2.21"
 }
 
 tasks {
@@ -42,16 +42,16 @@ tasks {
                 .bufferedWriter().use { configurations.compile.forEach { s -> it.write("$s\n") } }
     }
 
-    withType<Wrapper> {
-        gradleVersion = "4.4.1"
-        distributionType = Wrapper.DistributionType.ALL
-    }
-
     withType<Jar> {
         dependsOn(beforeJar)
         version = ""
         manifest.attributes["Main-Class"] = "com.xhstormr.foldercleaner.FolderCleaner"
         from(buildDir.resolve("tmp/1.txt").bufferedReader().readLines().map { zipTree(it) })
+    }
+
+    withType<Wrapper> {
+        gradleVersion = "4.5"
+        distributionType = Wrapper.DistributionType.ALL
     }
 
     withType<KotlinCompile> {

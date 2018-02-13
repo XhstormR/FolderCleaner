@@ -5,9 +5,7 @@ import java.util.*
 
 private object FolderCleaner {
     @JvmStatic
-    fun main(args: Array<String>) {
-        FolderCleaner.start()
-    }
+    fun main(args: Array<String>) = FolderCleaner.start()
 
     fun start() {
 //      val files = URLDecoder.decode(FolderCleaner::class.java.protectionDomain.codeSource.location.path, "utf-8").let { File(it.substring(1, it.lastIndexOf('/') + 1)) }
@@ -45,7 +43,8 @@ private object FolderCleaner {
     }
 
     private fun getNum(name: String): Int {
-        val index = name.lastIndexOf('(')
-        return if (index == -1) 0 else name.substring(index + 1, name.length - 1).toInt()
+        val index1 = name.lastIndexOf('(')
+        val index2 = name.lastIndexOf(')')
+        return if (index1 == -1 || index2 == -1) 0 else name.substring(index1 + 1, index2).toInt()
     }
 }
